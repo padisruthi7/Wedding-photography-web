@@ -17,8 +17,8 @@ import {
   FiWifi,
   FiArrowRight,
 } from "react-icons/fi";
+
 import {
-  FaDragon,
   FaBaby,
   FaBirthdayCake,
   FaBuilding,
@@ -29,6 +29,7 @@ import {
   FaPhotoVideo,
   FaWhatsapp,
 } from "react-icons/fa";
+
 import SectionHeading from "@/components/SectionHeading";
 import { SERVICES, SITE_CONFIG } from "@/lib/constants";
 
@@ -43,6 +44,7 @@ function AnimatedSection({
 }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
+
   return (
     <motion.div
       ref={ref}
@@ -62,7 +64,10 @@ const iconMap: Record<string, React.ReactNode> = {
   film: <FaPhotoVideo className="w-6 h-6" />,
   heart: <FiHeart className="w-6 h-6" />,
   image: <FiImage className="w-6 h-6" />,
-  drone: <FaDrone className="w-6 h-6" />,
+
+  // FIXED: replaced FaDrone with valid icon
+  drone: <FaPhotoVideo className="w-6 h-6" />,
+
   party: <FiMusic className="w-6 h-6" />,
   ring: <FaRing className="w-6 h-6" />,
   couple: <FiHeart className="w-6 h-6" />,
@@ -94,9 +99,14 @@ function ServiceCategory({
   index: number;
 }) {
   return (
-    <section className={`py-16 md:py-20 px-4 ${index % 2 === 0 ? "bg-white" : "bg-cream"}`}>
+    <section
+      className={`py-16 md:py-20 px-4 ${
+        index % 2 === 0 ? "bg-white" : "bg-cream"
+      }`}
+    >
       <div className="max-w-7xl mx-auto">
         <SectionHeading subtitle={`0${index + 1}`} title={title} />
+
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {items.map((item, i) => (
             <AnimatedSection key={item.name} delay={i * 0.08}>
@@ -104,8 +114,15 @@ function ServiceCategory({
                 <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
                   {iconMap[item.icon] || <FiCamera className="w-6 h-6" />}
                 </div>
-                <h3 className="text-lg font-bold text-charcoal mb-2">{item.name}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed flex-1">{item.desc}</p>
+
+                <h3 className="text-lg font-bold text-charcoal mb-2">
+                  {item.name}
+                </h3>
+
+                <p className="text-gray-600 text-sm leading-relaxed flex-1">
+                  {item.desc}
+                </p>
+
                 <a
                   href={`https://wa.me/91${SITE_CONFIG.whatsapp}?text=Hi, I'm interested in your ${item.name} service. Can you share more details?`}
                   target="_blank"
@@ -128,10 +145,12 @@ export default function ServicesContent() {
 
   return (
     <>
-      {/* Hero */}
+      {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920&q=80')] bg-cover bg-center" />
+
         <div className="absolute inset-0 bg-black/60" />
+
         <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
           <motion.span
             initial={{ opacity: 0, y: -10 }}
@@ -141,6 +160,7 @@ export default function ServicesContent() {
           >
             What We Offer
           </motion.span>
+
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -149,19 +169,21 @@ export default function ServicesContent() {
           >
             Our Services
           </motion.h1>
+
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-lg text-gray-300 max-w-2xl mx-auto"
           >
-            From grand weddings to intimate celebrations, we offer a complete range of
-            photography and videography services tailored to your needs.
+            From grand weddings to intimate celebrations, we offer a complete
+            range of photography and videography services tailored to your
+            needs.
           </motion.p>
         </div>
       </section>
 
-      {/* Service Categories */}
+      {/* Categories */}
       {categories.map((category, i) => (
         <ServiceCategory
           key={category.title}
@@ -178,10 +200,13 @@ export default function ServicesContent() {
             <h2 className="text-3xl md:text-4xl font-bold font-[var(--font-playfair)] mb-6">
               Can&apos;t Find What You Need?
             </h2>
+
             <p className="text-lg text-gray-300 mb-8">
-              We offer customized packages tailored to your specific requirements.
-              Get in touch and let&apos;s create the perfect plan for your celebration.
+              We offer customized packages tailored to your specific
+              requirements. Get in touch and let&apos;s create the perfect plan
+              for your celebration.
             </p>
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href={`https://wa.me/91${SITE_CONFIG.whatsapp}?text=Hi, I'd like a custom photography package for my event. Can we discuss?`}
@@ -192,6 +217,7 @@ export default function ServicesContent() {
                 <FaWhatsapp className="w-5 h-5" />
                 Get Custom Quote
               </a>
+
               <a
                 href={`tel:${SITE_CONFIG.phone}`}
                 className="flex items-center gap-3 border-2 border-gold text-gold hover:bg-gold hover:text-white px-8 py-4 rounded-full text-lg font-semibold transition-all"
