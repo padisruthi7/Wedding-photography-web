@@ -18,7 +18,7 @@ import {
   FiArrowRight,
 } from "react-icons/fi";
 import {
-  FaDrone,
+  FaDragon,
   FaBaby,
   FaBirthdayCake,
   FaBuilding,
