@@ -6,6 +6,7 @@ import { motion, useInView } from "framer-motion";
 import { FiClock, FiTag, FiArrowRight } from "react-icons/fi";
 import SectionHeading from "@/components/SectionHeading";
 import { BLOG_POSTS } from "@/lib/constants";
+import { mediaUrl } from "@/lib/media";
 
 function AnimatedSection({
   children,
@@ -32,26 +33,28 @@ function AnimatedSection({
 }
 
 const blogImages = [
-  "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
-  "https://images.unsplash.com/photo-1529636798458-92182e662485?w=600&q=80",
-  "https://images.unsplash.com/photo-1464699908537-0954e50791ee?w=600&q=80",
-  "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=80",
-  "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80",
-  "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80",
+  mediaUrl("/images/wedding/DSC_2031.jpg"),
+  mediaUrl("/images/prewedding/Picsart_25-09-30_22-27-16-243.png"),
+  mediaUrl("/images/wedding/Picsart_26-07-07_22-21-23-995.jpg"),
+  mediaUrl("/images/prewedding/5x3...10.jpg.tiff"),
+  mediaUrl("/images/wedding/DSC_2031.jpg"),
+  mediaUrl("/images/drone/DJI_0258.JPG"),
 ];
 
 export default function BlogContent() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=1920&q=80')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
+      <section className="relative min-h-[480px] md:min-h-[560px] flex items-center justify-center pt-28 pb-20 md:pt-36 md:pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${mediaUrl("/images/wedding/DSC_2031.jpg")})` }} />
+        <div className="absolute inset-0 hero-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-black/45" />
+
+        <div className="relative z-10 max-w-5xl mx-auto text-center text-white px-4 sm:px-6">
           <motion.span
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block text-gold text-sm tracking-widest uppercase font-semibold mb-4"
+            className="inline-block px-5 py-2 rounded-full border border-gold/60 bg-white/10 backdrop-blur-sm text-gold text-sm tracking-[0.3em] uppercase font-semibold mb-6"
           >
             Insights & Tips
           </motion.span>
@@ -59,7 +62,7 @@ export default function BlogContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold font-[var(--font-playfair)] mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-[var(--font-playfair)] mb-6 leading-tight"
           >
             Our Blog
           </motion.h1>
@@ -67,7 +70,7 @@ export default function BlogContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed"
           >
             Expert tips, inspiration, and guides to help you plan the perfect
             wedding and make the most of your photography experience.
@@ -79,22 +82,21 @@ export default function BlogContent() {
       <section className="py-16 md:py-24 px-4 bg-white">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
-            subtitle="Latest Articles"
-            title="Wedding Tips & Inspiration"
-            description="Read our expert guides on wedding photography, planning, and more."
+            subtitle="Stories & Inspiration"
+            title="Explore Our Latest Articles"
+            description="Thoughtful ideas, wedding planning guidance, and photography inspiration for every unforgettable celebration."
+            centered
           />
 
           {/* Featured Post */}
           <AnimatedSection className="mb-12">
-            <div className="group grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-2xl overflow-hidden bg-white border border-gray-100 card-hover">
+            <div className="group grid grid-cols-1 gap-0 rounded-[2rem] overflow-hidden border border-gray-100 bg-white shadow-sm">
               <div className="relative aspect-video lg:aspect-auto overflow-hidden">
                 <div
-                  className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                  style={{ backgroundImage: `url(${blogImages[0]})` }}
+                  className="absolute inset-0 h-full w-full bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${blogImages[0]})`, backgroundSize: "cover", backgroundPosition: "center" }}
                 />
-                <span className="absolute top-4 left-4 bg-gold text-white text-xs font-semibold px-3 py-1 rounded-full">
-                  Featured
-                </span>
+        
               </div>
               <div className="p-8 lg:p-12 flex flex-col justify-center">
                 <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
@@ -127,11 +129,11 @@ export default function BlogContent() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {BLOG_POSTS.slice(1).map((post, i) => (
               <AnimatedSection key={post.slug} delay={i * 0.1}>
-                <div className="group rounded-2xl overflow-hidden border border-gray-100 bg-white card-hover h-full flex flex-col">
+                <div className="group rounded-[2rem] overflow-hidden border border-gray-100 bg-white shadow-sm h-full flex flex-col">
                   <div className="relative aspect-video overflow-hidden">
                     <div
-                      className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
-                      style={{ backgroundImage: `url(${blogImages[i + 1]})` }}
+                      className="absolute inset-0 h-full w-full bg-cover bg-center bg-no-repeat transition-transform duration-700 group-hover:scale-110"
+                      style={{ backgroundImage: `url(${blogImages[i + 1]})`, backgroundSize: "cover", backgroundPosition: "center" }}
                     />
                   </div>
                   <div className="p-6 flex flex-col flex-1">
@@ -166,26 +168,29 @@ export default function BlogContent() {
       </section>
 
       {/* Newsletter CTA */}
-      <section className="py-20 px-4 bg-dark text-white">
-        <div className="max-w-3xl mx-auto text-center">
+      <section className="py-16 md:py-24 px-4 bg-dark text-white">
+        <div className="max-w-5xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-3xl md:text-4xl font-bold font-[var(--font-playfair)] mb-6">
-              More Articles Coming Soon
-            </h2>
-            <p className="text-lg text-gray-300 mb-8">
-              We&apos;re constantly sharing new wedding tips, venue guides, and
-              photography inspiration. Stay tuned for more!
-            </p>
-            <Link
-              href="/contact"
-              className="inline-flex items-center gap-3 bg-gold hover:bg-gold-dark text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg"
-            >
-              Get In Touch
-              <FiArrowRight className="w-5 h-5" />
-            </Link>
+            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 md:p-12 text-center shadow-sm">
+              <h2 className="text-3xl md:text-4xl font-bold font-[var(--font-playfair)] mb-6">
+                More Articles Coming Soon
+              </h2>
+              <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                We&apos;re constantly sharing new wedding tips, venue guides, and
+                photography inspiration. Stay tuned for more!
+              </p>
+              <Link
+                href="/contact"
+                className="inline-flex items-center gap-3 bg-gold hover:bg-gold-dark text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg"
+              >
+                Get In Touch
+                <FiArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
           </AnimatedSection>
         </div>
       </section>
     </>
   );
 }
+

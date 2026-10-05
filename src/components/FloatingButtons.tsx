@@ -3,12 +3,13 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
-import { FiPhone, FiX } from "react-icons/fi";
+import { FiPhone, FiShare2, FiX, FiCheck } from "react-icons/fi";
 import { SITE_CONFIG } from "@/lib/constants";
 
 export default function FloatingButtons() {
   const [showPopup, setShowPopup] = useState(false);
   const [popupDismissed, setPopupDismissed] = useState(false);
+  const [shareStatus, setShareStatus] = useState<"idle" | "shared" | "copied">("idle");
 
   useEffect(() => {
     if (popupDismissed) return;
@@ -16,8 +17,52 @@ export default function FloatingButtons() {
     return () => clearTimeout(timer);
   }, [popupDismissed]);
 
+  const handleShare = async () => {
+    const shareUrl = window.location.href;
+    const shareTitle = "Gowri Wedding Photography";
+    const shareText = "Explore Gowri Wedding Photography and view our wedding stories.";
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
+          title: shareTitle,
+          text: shareText,
+          url: shareUrl,
+        });
+        setShareStatus("shared");
+      } else if (navigator.clipboard) {
+        await navigator.clipboard.writeText(shareUrl);
+        setShareStatus("copied");
+      } else {
+        window.prompt("Copy this link to share:", shareUrl);
+      }
+    } catch {
+      setShareStatus("idle");
+    }
+
+    window.setTimeout(() => setShareStatus("idle"), 1800);
+  };
+
   return (
     <>
+      {/* Floating Share Button */}
+      <motion.button
+        onClick={handleShare}
+        className="fixed bottom-24 right-6 z-50 w-14 h-14 bg-charcoal hover:bg-gray-800 rounded-full flex items-center justify-center shadow-2xl"
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{ delay: 1.1, type: "spring" }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        aria-label="Share website"
+      >
+        {shareStatus === "idle" ? (
+          <FiShare2 className="w-6 h-6 text-white" />
+        ) : (
+          <FiCheck className="w-6 h-6 text-white" />
+        )}
+      </motion.button>
+
       {/* Floating WhatsApp Button */}
       <motion.a
         href={`https://wa.me/91${SITE_CONFIG.whatsapp}?text=Hi, I'm interested in your wedding photography services. Can we discuss?`}
@@ -106,6 +151,13 @@ export default function FloatingButtons() {
         className="fixed bottom-0 left-0 right-0 z-40 lg:hidden bg-white border-t shadow-[0_-4px_20px_rgba(0,0,0,0.1)] px-4 py-3"
       >
         <div className="flex gap-2 max-w-lg mx-auto">
+          <button
+            onClick={handleShare}
+            className="flex-1 flex items-center justify-center gap-2 bg-charcoal text-white py-2.5 rounded-full text-sm font-semibold"
+          >
+            <FiShare2 className="w-4 h-4" />
+            Share
+          </button>
           <a
             href={`tel:${SITE_CONFIG.phone}`}
             className="flex-1 flex items-center justify-center gap-2 bg-charcoal text-white py-2.5 rounded-full text-sm font-semibold"

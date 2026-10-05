@@ -37,14 +37,14 @@ export default function SectionHeading({
       <h2
         className={`text-3xl md:text-4xl lg:text-5xl font-bold mb-4 ${
           light ? "text-white" : "text-charcoal"
-        }`}
+        } ${centered ? "text-center" : "text-left"}`}
       >
         {title}
       </h2>
-      <div className="w-20 h-1 gold-gradient rounded-full mx-auto mb-6" />
+      <div className={`w-20 h-1 gold-gradient rounded-full mb-6 ${centered ? "mx-auto" : "mx-0"}`} />
       {description && (
         <p
-          className={`max-w-2xl mx-auto text-lg ${
+          className={`max-w-2xl text-lg ${centered ? "mx-auto" : "mx-0"} ${
             light ? "text-gray-300" : "text-gray-600"
           }`}
         >

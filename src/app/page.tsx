@@ -11,10 +11,13 @@ import {
   FiMapPin,
   FiArrowRight,
   FiPhone,
+  FiCheckCircle,
 } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 import SectionHeading from "@/components/SectionHeading";
 import { SITE_CONFIG, TESTIMONIALS } from "@/lib/constants";
+import { mediaUrl } from "@/lib/media";
+import MediaImage from "@/components/MediaImage";
 
 function AnimatedSection({
   children,
@@ -43,7 +46,7 @@ function AnimatedSection({
 function HeroSection() {
   return (
     <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80')] bg-cover bg-center bg-no-repeat" />
+      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${mediaUrl("/images/wedding/DSC_2031.jpg")})` }} />
       <div className="absolute inset-0 hero-overlay" />
       <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-transparent to-black/40" />
 
@@ -65,9 +68,9 @@ function HeroSection() {
           transition={{ duration: 0.8, delay: 0.5 }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-[var(--font-playfair)] mb-6 leading-tight"
         >
-          Where Every Moment
+          Crafting Wedding Stories
           <br />
-          <span className="text-gold-gradient">Becomes Eternal</span>
+          <span className="text-gold-gradient">You&apos;ll Relive Forever</span>
         </motion.h1>
 
         <motion.p
@@ -76,8 +79,8 @@ function HeroSection() {
           transition={{ duration: 0.8, delay: 0.7 }}
           className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto"
         >
-          We don&apos;t just capture photos — we preserve emotions. Premium wedding
-          photography &amp; videography across Andhra Pradesh, Telangana &amp; Odisha.
+          From intimate ceremonies to grand celebrations, we create timeless
+          photography and cinematic films that feel as heartfelt as the day itself.
         </motion.p>
 
         <motion.div
@@ -170,6 +173,75 @@ function StatsSection() {
   );
 }
 
+function SignatureExperienceSection() {
+  const highlights = [
+    "Personalized planning with mood boards and shot lists",
+    "Candid storytelling that captures raw emotions",
+    "Cinematic editing with a warm, timeless finish",
+  ];
+
+  return (
+    <section className="py-20 md:py-24 px-4 bg-gradient-to-br from-cream via-white to-cream">
+      <div className="max-w-7xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+        <AnimatedSection>
+          <div className="max-w-2xl">
+            <span className="inline-block px-4 py-2 rounded-full bg-gold/10 text-gold font-semibold text-sm tracking-widest uppercase mb-4">
+              Signature Experience
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold font-[var(--font-playfair)] text-charcoal mb-5">
+              Every frame is designed to feel personal, elegant, and unforgettable.
+            </h2>
+            <p className="text-lg text-gray-600 leading-relaxed mb-8">
+              We blend artistic direction, careful planning, and heartfelt storytelling to create a collection that reflects your love story with grace.
+            </p>
+            <ul className="space-y-4">
+              {highlights.map((item) => (
+                <li key={item} className="flex items-start gap-3 text-gray-700">
+                  <FiCheckCircle className="w-5 h-5 text-gold mt-1 shrink-0" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection delay={0.1}>
+          <div className="rounded-[2rem] overflow-hidden premium-shadow bg-white">
+            <MediaImage
+              path="/images/wedding/DSC_0574.jpg"
+              alt="Wedding couple enjoying their celebration"
+              className="h-72 w-full object-cover"
+            />
+            <div className="p-8">
+              <h3 className="text-2xl font-semibold text-charcoal mb-3">
+                A wedding story told with warmth, elegance, and emotion.
+              </h3>
+              <p className="text-gray-600 leading-relaxed mb-6">
+                From intimate moments to grand celebrations, we create timeless imagery that feels natural, graceful, and deeply personal.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link
+                  href="/portfolio"
+                  className="inline-flex items-center gap-2 bg-gold hover:bg-gold-dark text-white px-5 py-3 rounded-full font-semibold transition-all"
+                >
+                  See Recent Weddings
+                  <FiArrowRight className="w-4 h-4" />
+                </Link>
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 border border-gray-200 hover:border-gold text-charcoal hover:text-gold px-5 py-3 rounded-full font-semibold transition-all"
+                >
+                  Plan Your Shoot
+                </Link>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+      </div>
+    </section>
+  );
+}
+
 function WhyChooseSection() {
   const reasons = [
     {
@@ -236,38 +308,60 @@ function FeaturedServicesSection() {
   const services = [
     {
       title: "Wedding Photography",
+      slug: "wedding-photography",
       desc: "Timeless photographs capturing every emotion of your special day.",
-      image: "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80",
+      image: mediaUrl("/images/wedding/DSC_0576.jpg"),
     },
     {
-      title: "Cinematic Films",
-      desc: "Hollywood-style wedding films with stunning visuals and storytelling.",
-      image: "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80",
+      title: "Wedding Videography",
+      slug: "wedding-videography",
+      desc: "Cinematic wedding films with heartfelt storytelling and elegant editing.",
+      image: mediaUrl("/images/wedding/DSC_2031.jpg"),
     },
     {
       title: "Pre-Wedding Shoots",
+      slug: "pre-wedding-shoots",
       desc: "Romantic photoshoots at stunning locations to tell your love story.",
-      image: "https://images.unsplash.com/photo-1529636798458-92182e662485?w=600&q=80",
+      image: mediaUrl("/images/prewedding/IMG-20260705-WA0007.jpg"),
+    },
+    {
+      title: "Cinematic Films",
+      slug: "cinematic-wedding-films",
+      desc: "Hollywood-style wedding films with stunning visuals and storytelling.",
+      image: mediaUrl("/images/bride/DSC_0664.jpg"),
     },
     {
       title: "Drone Coverage",
+      slug: "drone-wedding-coverage",
       desc: "Breathtaking aerial perspectives of your venue and celebrations.",
-      image: "https://images.unsplash.com/photo-1464699908537-0954e50791ee?w=600&q=80",
+      image: mediaUrl("/images/drone/DJI_0258.JPG"),
+    },
+    {
+      title: "Baby Shoots",
+      slug: "baby-shoots",
+      desc: "Gentle, memorable portraits that celebrate your little one’s first moments.",
+      image: mediaUrl("/images/birthday/IMG-20250122-WA0003.jpg"),
+    },
+    {
+      title: "Birthday Events",
+      slug: "birthday-event-coverage",
+      desc: "Joyful coverage for birthdays, milestones, and celebration-filled memories.",
+      image: mediaUrl("/images/birthday/cover.jpg"),
     },
   ];
 
   return (
-    <section className="py-20 md:py-28 px-4 bg-cream">
+    <section className="py-16 md:py-24 px-4 bg-cream">
       <div className="max-w-7xl mx-auto">
         <SectionHeading
           subtitle="Our Services"
           title="What We Offer"
           description="From intimate ceremonies to grand celebrations, we offer complete photography and videography solutions."
         />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {services.map((service, i) => (
             <AnimatedSection key={service.title} delay={i * 0.1}>
-              <Link href="/services" className="group block">
+              <Link href={`/services#${service.slug}`} className="group block">
                 <div className="relative overflow-hidden rounded-2xl aspect-[3/4] card-hover">
                   <div
                     className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110"
@@ -303,7 +397,7 @@ function FeaturedServicesSection() {
 
 function TestimonialsPreview() {
   return (
-    <section className="py-20 md:py-28 px-4 bg-dark text-white">
+    <section className="py-16 md:py-24 px-4 bg-dark text-white">
       <div className="max-w-7xl mx-auto">
         <SectionHeading
           subtitle="Testimonials"
@@ -355,16 +449,16 @@ function TestimonialsPreview() {
 
 function GalleryPreview() {
   const images = [
-    "https://images.unsplash.com/photo-1519741497674-611481863552?w=600&q=80",
-    "https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=600&q=80",
-    "https://images.unsplash.com/photo-1529636798458-92182e662485?w=600&q=80",
-    "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=600&q=80",
-    "https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=600&q=80",
-    "https://images.unsplash.com/photo-1464699908537-0954e50791ee?w=600&q=80",
+    mediaUrl("/images/wedding/DSC_0574.jpg"),
+    mediaUrl("/images/prewedding/IMG-20260705-WA0007.jpg"),
+    mediaUrl("/images/bride/DSC_0664.jpg"),
+    mediaUrl("/images/birthday/IMG-20250122-WA0003.jpg"),
+    mediaUrl("/images/halfsaree/IMG-20260119-WA0018.jpg"),
+    mediaUrl("/images/drone/DJI_0258.JPG"),
   ];
 
   return (
-    <section className="py-20 md:py-28 px-4 bg-white">
+    <section className="py-16 md:py-24 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
         <SectionHeading
           subtitle="Our Work"
@@ -403,7 +497,7 @@ function GalleryPreview() {
 function CTASection() {
   return (
     <section className="relative py-24 md:py-32 px-4 overflow-hidden">
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?w=1920&q=80')] bg-cover bg-center bg-fixed" />
+      <div className="absolute inset-0 bg-cover bg-center bg-fixed" style={{ backgroundImage: `url(${mediaUrl("/images/wedding/DSC_0574.jpg")})` }} />
       <div className="absolute inset-0 bg-black/70" />
       <div className="relative z-10 max-w-4xl mx-auto text-center text-white">
         <AnimatedSection>
@@ -455,6 +549,7 @@ export default function HomePage() {
     <>
       <HeroSection />
       <StatsSection />
+      <SignatureExperienceSection />
       <WhyChooseSection />
       <FeaturedServicesSection />
       <GalleryPreview />

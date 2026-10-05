@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import {
   FiCamera,
@@ -32,6 +32,7 @@ import {
 
 import SectionHeading from "@/components/SectionHeading";
 import { SERVICES, SITE_CONFIG } from "@/lib/constants";
+import { mediaUrl } from "@/lib/media";
 
 function AnimatedSection({
   children,
@@ -57,6 +58,12 @@ function AnimatedSection({
     </motion.div>
   );
 }
+
+const slugify = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
 
 const iconMap: Record<string, React.ReactNode> = {
   camera: <FiCamera className="w-6 h-6" />,
@@ -110,7 +117,10 @@ function ServiceCategory({
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {items.map((item, i) => (
             <AnimatedSection key={item.name} delay={i * 0.08}>
-              <div className="group p-6 rounded-2xl border border-gray-100 hover:border-gold/30 bg-white card-hover h-full flex flex-col">
+              <div
+                id={slugify(item.name)}
+                className="group p-6 rounded-2xl border border-gray-100 hover:border-gold/30 bg-white card-hover h-full flex flex-col"
+              >
                 <div className="w-12 h-12 rounded-xl gold-gradient flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
                   {iconMap[item.icon] || <FiCamera className="w-6 h-6" />}
                 </div>
@@ -143,20 +153,34 @@ function ServiceCategory({
 export default function ServicesContent() {
   const categories = Object.values(SERVICES);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const targetId = window.location.hash.replace("#", "");
+    if (!targetId) return;
+
+    const target = document.getElementById(targetId);
+    if (target) {
+      requestAnimationFrame(() => {
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    }
+  }, []);
+
   return (
     <>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1920&q=80')] bg-cover bg-center" />
+      <section className="relative min-h-[480px] md:min-h-[560px] flex items-center justify-center pt-28 pb-20 md:pt-36 md:pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${mediaUrl("/images/wedding/DSC_2031.jpg")})` }} />
+        <div className="absolute inset-0 hero-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-black/45" />
 
-        <div className="absolute inset-0 bg-black/60" />
-
-        <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
+        <div className="relative z-10 max-w-5xl mx-auto text-center text-white px-4 sm:px-6">
           <motion.span
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-block text-gold text-sm tracking-widest uppercase font-semibold mb-4"
+            className="inline-block px-5 py-2 rounded-full border border-gold/60 bg-white/10 backdrop-blur-sm text-gold text-sm tracking-[0.3em] uppercase font-semibold mb-6"
           >
             What We Offer
           </motion.span>
@@ -165,7 +189,7 @@ export default function ServicesContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold font-[var(--font-playfair)] mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-[var(--font-playfair)] mb-6 leading-tight"
           >
             Our Services
           </motion.h1>
@@ -174,7 +198,7 @@ export default function ServicesContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed"
           >
             From grand weddings to intimate celebrations, we offer a complete
             range of photography and videography services tailored to your
@@ -194,36 +218,38 @@ export default function ServicesContent() {
       ))}
 
       {/* CTA */}
-      <section className="py-20 md:py-28 px-4 bg-dark text-white">
-        <div className="max-w-3xl mx-auto text-center">
+      <section className="py-16 md:py-24 px-4 bg-dark text-white">
+        <div className="max-w-5xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-3xl md:text-4xl font-bold font-[var(--font-playfair)] mb-6">
-              Can&apos;t Find What You Need?
-            </h2>
+            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 md:p-12 text-center shadow-sm">
+              <h2 className="text-3xl md:text-4xl font-bold font-[var(--font-playfair)] mb-6">
+                Can&apos;t Find What You Need?
+              </h2>
 
-            <p className="text-lg text-gray-300 mb-8">
-              We offer customized packages tailored to your specific
-              requirements. Get in touch and let&apos;s create the perfect plan
-              for your celebration.
-            </p>
+              <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                We offer customized packages tailored to your specific
+                requirements. Get in touch and let&apos;s create the perfect plan
+                for your celebration.
+              </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href={`https://wa.me/91${SITE_CONFIG.whatsapp}?text=Hi, I'd like a custom photography package for my event. Can we discuss?`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg"
-              >
-                <FaWhatsapp className="w-5 h-5" />
-                Get Custom Quote
-              </a>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                  href={`https://wa.me/91${SITE_CONFIG.whatsapp}?text=Hi, I'd like a custom photography package for my event. Can we discuss?`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg"
+                >
+                  <FaWhatsapp className="w-5 h-5" />
+                  Get Custom Quote
+                </a>
 
-              <a
-                href={`tel:${SITE_CONFIG.phone}`}
-                className="flex items-center gap-3 border-2 border-gold text-gold hover:bg-gold hover:text-white px-8 py-4 rounded-full text-lg font-semibold transition-all"
-              >
-                Call: +91 {SITE_CONFIG.phone}
-              </a>
+                <a
+                  href={`tel:${SITE_CONFIG.phone}`}
+                  className="flex items-center gap-3 border-2 border-gold text-gold hover:bg-gold hover:text-white px-8 py-4 rounded-full text-lg font-semibold transition-all"
+                >
+                  Call: +91 {SITE_CONFIG.phone}
+                </a>
+              </div>
             </div>
           </AnimatedSection>
         </div>

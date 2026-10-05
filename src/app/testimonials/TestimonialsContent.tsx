@@ -6,6 +6,7 @@ import { FiStar, FiArrowRight } from "react-icons/fi";
 import { FaWhatsapp, FaQuoteLeft } from "react-icons/fa";
 import SectionHeading from "@/components/SectionHeading";
 import { TESTIMONIALS, SITE_CONFIG } from "@/lib/constants";
+import { mediaUrl } from "@/lib/media";
 
 function AnimatedSection({
   children,
@@ -35,14 +36,15 @@ export default function TestimonialsContent() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1920&q=80')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
+      <section className="relative min-h-[480px] md:min-h-[560px] flex items-center justify-center pt-28 pb-20 md:pt-36 md:pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${mediaUrl("/images/wedding/DSC_2031.jpg")})` }} />
+        <div className="absolute inset-0 hero-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-black/45" />
+        <div className="relative z-10 max-w-5xl mx-auto text-center text-white px-4 sm:px-6">
           <motion.span
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block text-gold text-sm tracking-widest uppercase font-semibold mb-4"
+            className="inline-block px-5 py-2 rounded-full border border-gold/60 bg-white/10 backdrop-blur-sm text-gold text-sm tracking-[0.3em] uppercase font-semibold mb-6"
           >
             Client Love
           </motion.span>
@@ -50,7 +52,7 @@ export default function TestimonialsContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold font-[var(--font-playfair)] mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-[var(--font-playfair)] mb-6 leading-tight"
           >
             What Our Clients Say
           </motion.h1>
@@ -58,7 +60,7 @@ export default function TestimonialsContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed"
           >
             Over 500 happy families have trusted us with their most precious
             celebrations. Here&apos;s what they have to say about their experience.
@@ -139,33 +141,35 @@ export default function TestimonialsContent() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 px-4 bg-dark text-white">
-        <div className="max-w-3xl mx-auto text-center">
+      <section className="py-16 md:py-24 px-4 bg-dark text-white">
+        <div className="max-w-5xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-3xl md:text-4xl font-bold font-[var(--font-playfair)] mb-6">
-              Be Our Next Happy Client
-            </h2>
-            <p className="text-lg text-gray-300 mb-8">
-              Join 500+ families who trusted us with their celebrations. Book your
-              session today and experience the Gowri difference.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href={`https://wa.me/91${SITE_CONFIG.whatsapp}?text=Hi, I saw your amazing reviews! I'd like to book you for my event.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg"
-              >
-                <FaWhatsapp className="w-5 h-5" />
-                Book Now
-              </a>
-              <a
-                href="/contact"
-                className="flex items-center gap-3 border-2 border-gold text-gold hover:bg-gold hover:text-white px-8 py-4 rounded-full text-lg font-semibold transition-all"
-              >
-                Contact Us
-                <FiArrowRight className="w-5 h-5" />
-              </a>
+            <div className="rounded-[2rem] border border-white/10 bg-white/5 p-8 md:p-12 text-center shadow-sm">
+              <h2 className="text-3xl md:text-4xl font-bold font-[var(--font-playfair)] mb-6">
+                Be Our Next Happy Client
+              </h2>
+              <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                Join 500+ families who trusted us with their celebrations. Book your
+                session today and experience the Gowri difference.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                  href={`https://wa.me/91${SITE_CONFIG.whatsapp}?text=Hi, I saw your amazing reviews! I'd like to book you for my event.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg"
+                >
+                  <FaWhatsapp className="w-5 h-5" />
+                  Book Now
+                </a>
+                <a
+                  href="/contact"
+                  className="flex items-center gap-3 border-2 border-gold text-gold hover:bg-gold hover:text-white px-8 py-4 rounded-full text-lg font-semibold transition-all"
+                >
+                  Contact Us
+                  <FiArrowRight className="w-5 h-5" />
+                </a>
+              </div>
             </div>
           </AnimatedSection>
         </div>

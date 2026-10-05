@@ -28,6 +28,13 @@ yarn-error.log*
 # Local env files
 .env.local
 .env.*.local
+.env
+.env.*
+!.env.example
+public/images/
+media-optimized/
+media-optimized-photos/
+media-optimization-test/
 
 # IDE
 .vscode/

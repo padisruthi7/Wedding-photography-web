@@ -6,6 +6,7 @@ import { FiPhone, FiMail, FiMapPin, FiClock, FiSend, FiCheck } from "react-icons
 import { FaWhatsapp, FaInstagram } from "react-icons/fa";
 import SectionHeading from "@/components/SectionHeading";
 import { SITE_CONFIG } from "@/lib/constants";
+import { mediaUrl } from "@/lib/media";
 
 function AnimatedSection({
   children,
@@ -97,14 +98,16 @@ Message: ${formData.message}`;
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=1920&q=80')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
+      <section className="relative min-h-[480px] md:min-h-[560px] flex items-center justify-center pt-28 pb-20 md:pt-36 md:pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${mediaUrl("/images/wedding/DSC_2031.jpg")})` }} />
+        <div className="absolute inset-0 hero-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-black/45" />
+
+        <div className="relative z-10 max-w-5xl mx-auto text-center text-white px-4 sm:px-6">
           <motion.span
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="inline-block text-gold text-sm tracking-widest uppercase font-semibold mb-4"
+            className="inline-block px-5 py-2 rounded-full border border-gold/60 bg-white/10 backdrop-blur-sm text-gold text-sm tracking-[0.3em] uppercase font-semibold mb-6"
           >
             Get In Touch
           </motion.span>
@@ -112,7 +115,7 @@ Message: ${formData.message}`;
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold font-[var(--font-playfair)] mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-[var(--font-playfair)] mb-6 leading-tight"
           >
             Contact Us
           </motion.h1>
@@ -120,7 +123,7 @@ Message: ${formData.message}`;
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed"
           >
             Ready to capture your special moments? We&apos;d love to hear about your
             celebration. Get in touch and let&apos;s create magic together.
@@ -129,15 +132,15 @@ Message: ${formData.message}`;
       </section>
 
       {/* Contact Info Cards */}
-      <section className="relative -mt-12 z-20 px-4">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <section className="relative z-20 px-4 -mt-10 md:-mt-14">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {contactInfo.map((info, i) => (
             <AnimatedSection key={info.label} delay={i * 0.1}>
               <a
                 href={info.link}
                 target={info.label === "Instagram" || info.label === "WhatsApp" ? "_blank" : undefined}
                 rel={info.label === "Instagram" || info.label === "WhatsApp" ? "noopener noreferrer" : undefined}
-                className="block bg-white rounded-2xl p-6 text-center shadow-xl hover:shadow-2xl card-hover"
+                className="block rounded-[1.5rem] border border-gray-100 bg-white p-6 text-center shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
               >
                 <div className="w-14 h-14 rounded-full gold-gradient flex items-center justify-center text-white mx-auto mb-3">
                   {info.icon}
@@ -162,7 +165,7 @@ Message: ${formData.message}`;
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Form */}
             <AnimatedSection>
-              <div className="bg-cream rounded-2xl p-8 md:p-10">
+              <div className="rounded-[2rem] border border-gray-100 bg-cream p-8 md:p-10 shadow-sm">
                 {submitted ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -326,7 +329,7 @@ Message: ${formData.message}`;
             {/* Map + Info */}
             <AnimatedSection delay={0.2}>
               <div className="space-y-6">
-                <div className="rounded-2xl overflow-hidden shadow-lg h-[300px]">
+                <div className="overflow-hidden rounded-[2rem] border border-gray-100 shadow-sm h-[320px]">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.8!2d84.0!3d18.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3c11a7a9a9a9a7%3A0x0!2sBillumada%2C+Bhamini%2C+Srikakulam!5e0!3m2!1sen!4v1"
                     width="100%"
@@ -339,7 +342,7 @@ Message: ${formData.message}`;
                   />
                 </div>
 
-                <div className="bg-cream rounded-2xl p-8">
+                <div className="rounded-[2rem] border border-gray-100 bg-cream p-8 shadow-sm">
                   <h3 className="text-xl font-bold text-charcoal mb-6">
                     Visit Our Studio
                   </h3>

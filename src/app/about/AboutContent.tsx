@@ -5,6 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { FiCamera, FiHeart, FiUsers, FiAward, FiMapPin, FiStar } from "react-icons/fi";
 import SectionHeading from "@/components/SectionHeading";
 import { SITE_CONFIG } from "@/lib/constants";
+import { mediaUrl } from "@/lib/media";
 import { FaWhatsapp } from "react-icons/fa";
 
 function AnimatedSection({
@@ -68,15 +69,16 @@ export default function AboutContent() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1591604466107-ec97de577aff?w=1920&q=80')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-black/60" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center text-white px-4">
+      <section className="relative min-h-[480px] md:min-h-[560px] flex items-center justify-center pt-28 pb-20 md:pt-36 md:pb-24 overflow-hidden">
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url(${mediaUrl("/images/wedding/DSC_2031.jpg")})` }} />
+        <div className="absolute inset-0 hero-overlay" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-transparent to-black/45" />
+        <div className="relative z-10 max-w-5xl mx-auto text-center text-white px-4 sm:px-6">
           <motion.span
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-block text-gold text-sm tracking-widest uppercase font-semibold mb-4"
+            className="inline-block px-5 py-2 rounded-full border border-gold/60 bg-white/10 backdrop-blur-sm text-gold text-sm tracking-[0.3em] uppercase font-semibold mb-6"
           >
             Our Story
           </motion.span>
@@ -84,7 +86,7 @@ export default function AboutContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-4xl md:text-6xl font-bold font-[var(--font-playfair)] mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold font-[var(--font-playfair)] mb-6 leading-tight"
           >
             About Gowri Wedding Photography
           </motion.h1>
@@ -92,7 +94,7 @@ export default function AboutContent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed"
           >
             A journey that began with a passion for preserving the most beautiful
             moments of life — your celebrations, your love, your legacy.
@@ -101,55 +103,57 @@ export default function AboutContent() {
       </section>
 
       {/* Story */}
-      <section className="py-20 md:py-28 px-4 bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <section className="py-16 md:py-24 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.95fr_1.05fr] gap-10 lg:gap-16 items-center">
             <AnimatedSection>
-              <div className="relative">
-                <div className="aspect-[4/5] rounded-2xl overflow-hidden">
-                  <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1606216794074-735e91aa2c92?w=800&q=80')] bg-cover bg-center" />
+              <div className="relative mx-auto max-w-xl lg:mx-0">
+                <div className="relative rounded-[2rem] overflow-hidden premium-shadow">
+                  <div className="aspect-[4/5] w-full bg-cover bg-center" style={{ backgroundImage: `url(${mediaUrl("/images/logo/IMG-20250227-WA0017.jpg")})` }} />
                 </div>
                 <div className="absolute -bottom-6 -right-6 bg-gold text-white p-6 rounded-2xl shadow-xl">
-                  <div className="text-3xl font-bold">Since</div>
-                  <div className="text-4xl font-bold">{SITE_CONFIG.established}</div>
+                  <div className="text-2xl md:text-3xl font-semibold">Since</div>
+                  <div className="text-3xl md:text-4xl font-bold">{SITE_CONFIG.established}</div>
                 </div>
               </div>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.2}>
-              <span className="text-gold font-semibold text-sm tracking-widest uppercase">
-                Who We Are
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold text-charcoal mt-3 mb-6 font-[var(--font-playfair)]">
-                Preserving Your Most Precious Moments
-              </h2>
-              <div className="space-y-4 text-gray-600 leading-relaxed">
-                <p>
-                  Founded in {SITE_CONFIG.established}, Gowri Wedding Photography was born
-                  from a simple yet powerful belief — that every celebration deserves to be
-                  remembered in its full glory. What started as a passion project has grown
-                  into one of the most trusted photography brands across South India.
-                </p>
-                <p>
-                  We specialize in capturing the raw, unfiltered emotions that make
-                  weddings and family celebrations truly special. From the nervous excitement
-                  of a bride getting ready to the joyful tears during the pheras, from the
-                  energetic sangeet performances to the quiet, intimate moments between
-                  couples — we are there to preserve it all.
-                </p>
-                <p>
-                  Our team of experienced photographers and videographers brings together
-                  artistic vision, technical expertise, and a deep understanding of
-                  Indian wedding traditions. We use state-of-the-art equipment including
-                  professional cameras, cinematic lenses, professional lighting systems,
-                  and high-end drones to deliver results that exceed expectations.
-                </p>
-                <p>
-                  Today, we proudly serve clients across{" "}
-                  {SITE_CONFIG.serviceAreas.join(", ")}, and have covered hundreds of
-                  destination events. Our commitment remains unchanged — to deliver
-                  premium quality work that becomes a treasured part of your family legacy.
-                </p>
+            <AnimatedSection delay={0.1}>
+              <div className="max-w-2xl lg:ml-auto">
+                <span className="inline-block text-gold font-semibold text-sm tracking-[0.3em] uppercase mb-4">
+                  Who We Are
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-6 font-[var(--font-playfair)] leading-tight">
+                  Preserving Your Most Precious Moments
+                </h2>
+                <div className="space-y-4 text-gray-600 leading-relaxed text-lg">
+                  <p>
+                    Founded in {SITE_CONFIG.established}, Gowri Wedding Photography was born
+                    from a simple yet powerful belief — that every celebration deserves to be
+                    remembered in its full glory. What started as a passion project has grown
+                    into one of the most trusted photography brands across South India.
+                  </p>
+                  <p>
+                    We specialize in capturing the raw, unfiltered emotions that make
+                    weddings and family celebrations truly special. From the nervous excitement
+                    of a bride getting ready to the joyful tears during the pheras, from the
+                    energetic sangeet performances to the quiet, intimate moments between
+                    couples — we are there to preserve it all.
+                  </p>
+                  <p>
+                    Our team of experienced photographers and videographers brings together
+                    artistic vision, technical expertise, and a deep understanding of
+                    Indian wedding traditions. We use state-of-the-art equipment including
+                    professional cameras, cinematic lenses, professional lighting systems,
+                    and high-end drones to deliver results that exceed expectations.
+                  </p>
+                  <p>
+                    Today, we proudly serve clients across{" "}
+                    {SITE_CONFIG.serviceAreas.join(", ")}, and have covered hundreds of
+                    destination events. Our commitment remains unchanged — to deliver
+                    premium quality work that becomes a treasured part of your family legacy.
+                  </p>
+                </div>
               </div>
             </AnimatedSection>
           </div>
@@ -157,7 +161,7 @@ export default function AboutContent() {
       </section>
 
       {/* Values */}
-      <section className="py-20 md:py-28 px-4 bg-cream">
+      <section className="py-16 md:py-24 px-4 bg-cream">
         <div className="max-w-7xl mx-auto">
           <SectionHeading
             subtitle="Our Values"
@@ -183,8 +187,8 @@ export default function AboutContent() {
       </section>
 
       {/* Service Areas */}
-      <section className="py-20 md:py-28 px-4 bg-dark text-white">
-        <div className="max-w-5xl mx-auto text-center">
+      <section className="py-16 md:py-24 px-4 bg-dark text-white">
+        <div className="max-w-7xl mx-auto text-center">
           <SectionHeading
             subtitle="Where We Serve"
             title="Our Service Areas"
@@ -216,32 +220,34 @@ export default function AboutContent() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 md:py-28 px-4 bg-white">
-        <div className="max-w-3xl mx-auto text-center">
+      <section className="py-16 md:py-24 px-4 bg-white">
+        <div className="max-w-5xl mx-auto">
           <AnimatedSection>
-            <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-6 font-[var(--font-playfair)]">
-              Ready to Create Beautiful Memories?
-            </h2>
-            <p className="text-lg text-gray-600 mb-8">
-              Let&apos;s discuss your upcoming celebration and create a customized
-              photography plan that perfectly captures your vision.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href={`https://wa.me/91${SITE_CONFIG.whatsapp}?text=Hi, I'd like to know more about Gowri Wedding Photography services.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg"
-              >
-                <FaWhatsapp className="w-5 h-5" />
-                Chat With Us
-              </a>
-              <a
-                href={`tel:${SITE_CONFIG.phone}`}
-                className="flex items-center gap-3 bg-gold hover:bg-gold-dark text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg"
-              >
-                Call: +91 {SITE_CONFIG.phone}
-              </a>
+            <div className="rounded-[2rem] border border-gray-100 bg-cream p-8 md:p-12 text-center shadow-sm">
+              <h2 className="text-3xl md:text-4xl font-bold text-charcoal mb-6 font-[var(--font-playfair)]">
+                Ready to Create Beautiful Memories?
+              </h2>
+              <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+                Let&apos;s discuss your upcoming celebration and create a customized
+                photography plan that perfectly captures your vision.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a
+                  href={`https://wa.me/91${SITE_CONFIG.whatsapp}?text=Hi, I'd like to know more about Gowri Wedding Photography services.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg"
+                >
+                  <FaWhatsapp className="w-5 h-5" />
+                  Chat With Us
+                </a>
+                <a
+                  href={`tel:${SITE_CONFIG.phone}`}
+                  className="flex items-center gap-3 bg-gold hover:bg-gold-dark text-white px-8 py-4 rounded-full text-lg font-semibold transition-all shadow-lg"
+                >
+                  Call: +91 {SITE_CONFIG.phone}
+                </a>
+              </div>
             </div>
           </AnimatedSection>
         </div>
